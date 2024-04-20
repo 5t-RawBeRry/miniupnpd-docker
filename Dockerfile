@@ -1,8 +1,8 @@
-FROM debian:12-slim
-LABEL org.opencontainers.image.source=https://github.com/HoshinoRei/miniupnpd-docker
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y miniupnpd && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+FROM alpine:edge
+LABEL org.opencontainers.image.source=https://github.com/5t-RawBeRry/miniupnpd-docker
+
+RUN apk add --no-cache miniupnpd
+RUN rm -rf /var/cache/apk/*
+
 VOLUME /etc/miniupnpd/miniupnpd.conf
 ENTRYPOINT ["miniupnpd", "-d", "-f", "/etc/miniupnpd/miniupnpd.conf"]
